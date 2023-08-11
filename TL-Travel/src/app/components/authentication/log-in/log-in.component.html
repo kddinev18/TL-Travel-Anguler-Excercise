@@ -1,0 +1,22 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+ 
+    <p>
+      <label for="userName">Username</label>
+      <input type="text" name="userName" ngModel>
+    </p>
+   
+    <p>
+      <label for="password">Password</label>
+      <input type="password" name="password" ngModel>
+    </p>
+
+    <p>
+      <label for="rememberMe">Remember me</label>
+      <input type="checkbox" name="rememberMe" value="Remember me" ngModel>
+    </p>
+
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+    
+  </form>
