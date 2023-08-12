@@ -32,7 +32,7 @@ export class LogInComponent {
     ).subscribe((token: TLTravelToken) =>
     {
       sessionStorage.setItem('Token', token.token);
-      this.router.navigate(['home/hotels']);
+      this.router.navigate(['hotel/hotels']);
       console.log(sessionStorage.getItem('Token'));
     });
   }

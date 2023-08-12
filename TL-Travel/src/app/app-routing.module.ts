@@ -14,10 +14,10 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'hotel',
     canActivate: [authenticationGuard],
     loadChildren: () =>
-    import('./components/home/home.module').then((m) => m.HomeModule),
+    import('./components/hotel/hotel.module').then((m) => m.HotelModule),
   },
   {
     path: '**', 

@@ -18,26 +18,26 @@ export class AuthenticationService {
       .set('content-type', 'application/json');
     
     return this.httpClient.post<TLTravelToken>("http://localhost:5000/api/Security/SignIn",
-    `{
-      "userName": "${userName}",
-      "password": "${password}",
-      "revokeExistingToken": true,
-      "rememberMe": true
-    }`, { 'headers': headers });
+    {
+      userName,
+      password,
+      revokeExistingToken: true,
+      rememberMe: true
+    }, { 'headers': headers });
   }
 
   public logOut()
   {
     console.log(1);
-    localStorage.removeItem('Token');
+    sessionStorage.removeItem('Token');
   }
 
   public isAuthenticated(): boolean
   {
     // This is test!!!!
     // Must rewrite it using request to theTLTravel API!!!
-    console.log(localStorage.getItem('Token'));
-    if(localStorage.getItem('Token') == null)
+    console.log(sessionStorage.getItem('Token'));
+    if(sessionStorage.getItem('Token') == null)
     {
       return false; 
     }
