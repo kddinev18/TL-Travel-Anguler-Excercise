@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TLTravelToken } from '../models/tl-travel-token.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,18 +12,37 @@ export class AuthenticationService {
     this.httpClient = httpClient;
   }
   
-  public authenticate(userName: string, password: string): Observable<string>
+  public authenticate(userName: string, password: string): Observable<TLTravelToken>
   {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+    const headers= new HttpHeaders()
+      .set('content-type', 'application/json');
     
-    return this.httpClient.post<string>("http://localhost:5000/api/Security/SignIn",
+    return this.httpClient.post<TLTravelToken>("http://localhost:5000/api/Security/SignIn",
     `{
       "userName": "${userName}",
       "password": "${password}",
       "revokeExistingToken": true,
       "rememberMe": true
-    }`, {headers});
+    }`, { 'headers': headers });
+  }
+
+  public logOut()
+  {
+    console.log(1);
+    localStorage.removeItem('Token');
+  }
+
+  public isAuthenticated(): boolean
+  {
+    // This is test!!!!
+    // Must rewrite it using request to theTLTravel API!!!
+    console.log(localStorage.getItem('Token'));
+    if(localStorage.getItem('Token') == null)
+    {
+      return false; 
+    }
+
+    return true;
   }
 }
 
