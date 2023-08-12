@@ -31,9 +31,9 @@ export class LogInComponent {
       this.userCredentialForm.value.password
     ).subscribe((token: TLTravelToken) =>
     {
-      localStorage.setItem('Token', token.token);
-      this.router.navigate(['home']);
-      console.log(localStorage.getItem('Token'));
+      sessionStorage.setItem('Token', token.token);
+      this.router.navigate(['home/hotels']);
+      console.log(sessionStorage.getItem('Token'));
     });
   }
 
