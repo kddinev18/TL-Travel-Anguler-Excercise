@@ -28,7 +28,6 @@ export class AuthenticationService {
 
   public logOut()
   {
-    console.log(1);
     sessionStorage.removeItem('Token');
   }
 
@@ -36,7 +35,6 @@ export class AuthenticationService {
   {
     // This is test!!!!
     // Must rewrite it using request to theTLTravel API!!!
-    console.log(sessionStorage.getItem('Token'));
     if(sessionStorage.getItem('Token') == null)
     {
       return false; 

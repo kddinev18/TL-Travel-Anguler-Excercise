@@ -3,6 +3,7 @@ import { TLTravelToken } from '../models/tl-travel-token.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-log-in',
@@ -29,12 +30,16 @@ export class LogInComponent {
     this.authenticationService.authenticate (
       this.userCredentialForm.value.userName,
       this.userCredentialForm.value.password
-    ).subscribe((token: TLTravelToken) =>
-    {
-      sessionStorage.setItem('Token', token.token);
-      this.router.navigate(['hotel/hotels']);
-      console.log(sessionStorage.getItem('Token'));
+    ).subscribe(    {
+      next: (token: TLTravelToken) => sessionStorage.setItem('Token', token.token),
+      error: (error: HttpErrorResponse) => {
+        if(error.status == 400 || error.status == 401)
+          alert("Wrong credentials");
+      },
+      complete: () => this.router.navigate(['hotel/hotels']) 
     });
+
+
   }
 
   public forget() :void {

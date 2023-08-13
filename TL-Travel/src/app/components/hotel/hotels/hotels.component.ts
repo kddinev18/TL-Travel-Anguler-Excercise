@@ -1,5 +1,7 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Hotel } from 'src/app/models/hotel.model';
+import { Pagination, SortColumn } from 'src/app/models/pagination.model';
 import { ServerResponse } from 'src/app/models/server-response.model';
 import { HotelService } from 'src/app/services/hotel.service';
 
@@ -17,7 +19,9 @@ export class HotelsComponent implements OnInit {
     this.hotelService = hotelService;
   }
   ngOnInit(): void {
-    this.hotelService.getAllHotels(20,1,'id','asc')
+    const pagination = new Pagination(1, 20, []);
+
+    this.hotelService.getAllHotels(pagination)
     .subscribe((serverResponse: ServerResponse<Hotel>) => {
       this.hotels = serverResponse.records;
     });
